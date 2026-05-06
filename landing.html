@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>aSoft — Native Mac Apps for Developers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --surface2: #1a1a24;
+      --border: rgba(255,255,255,0.07);
+      --accent: #6ee7b7;
+      --accent2: #818cf8;
+      --accent3: #fb923c;
+      --text: #f0f0f4;
+      --muted: #6b6b80;
+      --card-glow: rgba(110, 231, 183, 0.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Glow orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.25;
+    }
+    .orb-1 { width: 600px; height: 600px; background: #6ee7b7; top: -200px; right: -200px; }
+    .orb-2 { width: 500px; height: 500px; background: #818cf8; bottom: -100px; left: -150px; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(10,10,15,0.7);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
+    .logo span { color: var(--muted); }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-family: 'DM Mono', monospace;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      border: 1px solid rgba(110,231,183,0.3);
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+      background: rgba(110,231,183,0.05);
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    h1 .line1 { display: block; color: var(--text); }
+    h1 .line2 {
+      display: block;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.04em;
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SECTION */
+    section {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 64px;
+    }
+
+    /* PROJECTS GRID */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+      cursor: default;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--card-glow);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .card:hover {
+      border-color: rgba(110,231,183,0.2);
+      transform: translateY(-4px);
+    }
+    .card:hover::before { opacity: 1; }
+
+    .card-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+    }
+
+    .card-platform {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .tag-macos {
+      color: var(--accent2);
+      background: rgba(129,140,248,0.1);
+      border: 1px solid rgba(129,140,248,0.2);
+    }
+    .tag-ios {
+      color: var(--accent);
+      background: rgba(110,231,183,0.1);
+      border: 1px solid rgba(110,231,183,0.2);
+    }
+
+    .card h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .price-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      padding: 8px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0a0f;
+    }
+    .btn-primary:hover {
+      background: #a7f3d0;
+      transform: scale(1.03);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+    .status-live {
+      color: var(--accent);
+      background: rgba(110,231,183,0.1);
+      border: 1px solid rgba(110,231,183,0.2);
+    }
+    .status-soon {
+      color: var(--accent3);
+      background: rgba(251,146,60,0.1);
+      border: 1px solid rgba(251,146,60,0.2);
+    }
+    .status-badge::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    /* CARD ACCENT LINE */
+    .card-accent {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      border-radius: 20px 20px 0 0;
+    }
+    .accent-green { background: linear-gradient(90deg, var(--accent), transparent); }
+    .accent-purple { background: linear-gradient(90deg, var(--accent2), transparent); }
+    .accent-orange { background: linear-gradient(90deg, var(--accent3), transparent); }
+    .accent-mixed { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+
+    /* FOOTER */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--accent);
+    }
+    .footer-logo span { color: var(--muted); }
+
+    footer p {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text); }
+
+    /* SCROLL ANIMATION */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      .hero-stats { gap: 24px; }
+      footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<nav>
+  <div class="logo">a<span>/</span>soft</div>
+  <a href="https://asoft-dev.lemonsqueezy.com" target="_blank">Store →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Indie Mac & iOS Apps</div>
+  <h1>
+    <span class="line1">Tools built by</span>
+    <span class="line2">a developer,</span>
+    <span class="line1" style="font-size:0.6em; color: var(--muted); -webkit-text-fill-color: var(--muted);">for developers.</span>
+  </h1>
+  <p class="hero-sub">Native SwiftUI apps for macOS and iOS. No subscriptions. No bloat. Just tools that work.</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">4<span>+</span></div>
+      <div class="stat-label">Apps</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" style="color: var(--accent2);">100<span style="color:var(--accent2);">%</span></div>
+      <div class="stat-label">Native Swift</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" style="color: var(--accent3);">0<span style="color:var(--accent3);">$</span></div>
+      <div class="stat-label">Subscriptions</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="apps">
+  <div class="section-label">// products</div>
+  <div class="section-title reveal">All Apps</div>
+
+  <div class="projects">
+
+    <!-- Port Monitor -->
+    <div class="card reveal">
+      <div class="card-accent accent-green"></div>
+      <div class="card-icon" style="background: rgba(110,231,183,0.1);">🔌</div>
+      <div class="card-platform tag-macos">macOS</div>
+      <h3>Port Monitor</h3>
+      <p>Real-time TCP & UDP port monitoring from your menu bar. Kill processes, get alerts, pin favorites — no Terminal needed.</p>
+      <div class="card-tags">
+        <span class="tag">menu bar</span>
+        <span class="tag">networking</span>
+        <span class="tag">devtools</span>
+      </div>
+      <div class="card-footer">
+        <div>
+          <div class="price">€9.99</div>
+          <div class="price-sub">one-time purchase</div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
+          <span class="status-badge status-live">Live</span>
+          <a href="https://asoft-dev.lemonsqueezy.com" target="_blank" class="btn btn-primary">Buy →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Envio -->
+    <div class="card reveal">
+      <div class="card-accent accent-purple"></div>
+      <div class="card-icon" style="background: rgba(129,140,248,0.1);">🌿</div>
+      <div class="card-platform tag-macos">macOS</div>
+      <h3>Envio</h3>
+      <p>Switch between dev, staging & production .env files with one click. Manage all your projects from the menu bar.</p>
+      <div class="card-tags">
+        <span class="tag">menu bar</span>
+        <span class="tag">.env manager</span>
+        <span class="tag">devtools</span>
+      </div>
+      <div class="card-footer">
+        <div>
+          <div class="price">€9.99</div>
+          <div class="price-sub">one-time purchase</div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
+          <span class="status-badge status-live">Live</span>
+          <a href="https://asoft-dev.lemonsqueezy.com" target="_blank" class="btn btn-primary">Buy →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SoundManager macOS -->
+    <div class="card reveal">
+      <div class="card-accent accent-orange"></div>
+      <div class="card-icon" style="background: rgba(251,146,60,0.1);">🔊</div>
+      <div class="card-platform tag-ios">iOS</div>
+      <h3>SoundManager</h3>
+      <p>Control your Mac's volume remotely from your iPhone over Wi-Fi. Pairs with SoundManager Remote for Mac via Bonjour.</p>
+      <div class="card-tags">
+        <span class="tag">remote control</span>
+        <span class="tag">bonjour</span>
+        <span class="tag">audio</span>
+      </div>
+      <div class="card-footer">
+        <div>
+          <div class="price">~$4.99</div>
+          <div class="price-sub">App Store · coming soon</div>
+        </div>
+        <span class="status-badge status-soon">Coming Soon</span>
+      </div>
+    </div>
+
+    <!-- SoundManager Remote macOS -->
+    <div class="card reveal">
+      <div class="card-accent accent-mixed"></div>
+      <div class="card-icon" style="background: rgba(110,231,183,0.08);">🖥️</div>
+      <div class="card-platform tag-macos">macOS</div>
+      <h3>SoundManager Remote</h3>
+      <p>Menu bar server that broadcasts your Mac's volume over local network via Bonjour. Free companion to SoundManager iOS.</p>
+      <div class="card-tags">
+        <span class="tag">menu bar</span>
+        <span class="tag">bonjour</span>
+        <span class="tag">server</span>
+      </div>
+      <div class="card-footer">
+        <div>
+          <div class="price">Free</div>
+          <div class="price-sub">App Store · coming soon</div>
+        </div>
+        <span class="status-badge status-soon">Coming Soon</span>
+      </div>
+    </div>
+
+    <!-- Pasty -->
+    <div class="card reveal">
+      <div class="card-accent accent-purple"></div>
+      <div class="card-icon" style="background: rgba(129,140,248,0.1);">📋</div>
+      <div class="card-platform tag-ios">iOS</div>
+      <h3>Pasty</h3>
+      <p>Clipboard manager for power users. Instant history, smart search, and iCloud sync across all your Macs.</p>
+      <div class="card-tags">
+        <span class="tag">clipboard</span>
+        <span class="tag">productivity</span>
+        <span class="tag">icloud sync</span>
+      </div>
+      <div class="card-footer">
+        <div>
+          <div class="price">TBD</div>
+          <div class="price-sub">in development</div>
+        </div>
+        <span class="status-badge status-soon">In Dev</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">a<span>/</span>soft</div>
+  <p>© 2026 aSoft. Built with ♥ and Swift.</p>
+  <div class="footer-links">
+    <a href="https://asoft-dev.lemonsqueezy.com" target="_blank">Store</a>
+    <a href="https://github.com" target="_blank">GitHub</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

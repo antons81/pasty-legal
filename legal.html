@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legal — aSoft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --border: #1e1e2e;
+      --accent: #4ade80;
+      --accent2: #818cf8;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Inter', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(10,10,15,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--accent); }
+
+    nav a.back {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    nav a.back:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      padding: 60px 40px 40px;
+      border-bottom: 1px solid var(--border);
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: 600;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* TABS */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      padding: 24px 40px 0;
+      max-width: 860px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tab {
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 8px 18px;
+      border: none;
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .tab:hover { color: var(--text); }
+    .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* CONTENT */
+    .content {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 40px 80px;
+    }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .updated {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 40px;
+      padding: 10px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    h2 {
+      font-size: 11px;
+      font-family: var(--mono);
+      color: var(--accent2);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin: 40px 0 12px;
+    }
+    h2:first-of-type { margin-top: 0; }
+
+    p { color: #94a3b8; margin-bottom: 12px; }
+
+    ul {
+      list-style: none;
+      margin-bottom: 12px;
+    }
+    ul li {
+      color: #94a3b8;
+      padding: 4px 0 4px 20px;
+      position: relative;
+    }
+    ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    .highlight {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin: 20px 0;
+      color: #94a3b8;
+      font-size: 14px;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+      font-size: 12px;
+      font-family: var(--mono);
+    }
+
+    @media (max-width: 600px) {
+      nav, .hero, .tabs, .content, footer { padding-left: 20px; padding-right: 20px; }
+      h1 { font-size: 26px; }
+      .tabs { overflow-x: auto; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="landing.html">a<span>/</span>soft</a>
+  <a class="back" href="landing.html">← Back to aSoft</a>
+</nav>
+
+<div class="hero">
+  <div class="tag">// legal</div>
+  <h1>Terms, Privacy & Refunds</h1>
+  <p>Applies to all aSoft products: Port Monitor, Envio, and others sold via <a href="https://asoft-dev.lemonsqueezy.com">asoft-dev.lemonsqueezy.com</a></p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('terms', this)">Terms of Service</button>
+  <button class="tab" onclick="showTab('privacy', this)">Privacy Policy</button>
+  <button class="tab" onclick="showTab('refund', this)">Refund Policy</button>
+</div>
+
+<div class="content">
+
+  <!-- TERMS -->
+  <div class="section active" id="terms">
+    <div class="updated">Last updated: May 7, 2026</div>
+
+    <h2>01 — Agreement</h2>
+    <p>By purchasing or using any aSoft software ("Software"), you agree to these Terms of Service. aSoft is an independent software developer operating under the brand name aSoft (Anton Stremovskiy, Wuppertal, Germany).</p>
+
+    <h2>02 — License</h2>
+    <p>Upon purchase, you receive a personal, non-exclusive, non-transferable license to install and use the Software on your devices. You may not:</p>
+    <ul>
+      <li>Redistribute, resell, or sublicense the Software</li>
+      <li>Reverse engineer, decompile, or modify the Software</li>
+      <li>Use the Software for any unlawful purpose</li>
+    </ul>
+
+    <h2>03 — Products</h2>
+    <p>Current aSoft products include:</p>
+    <ul>
+      <li><strong style="color:var(--text)">Port Monitor</strong> — macOS menu bar app for real-time TCP/UDP port monitoring</li>
+      <li><strong style="color:var(--text)">Envio</strong> — macOS menu bar app for managing .env files across environments</li>
+    </ul>
+    <p>All products are sold as one-time purchases unless otherwise stated. No subscription is required.</p>
+
+    <h2>04 — System Requirements</h2>
+    <p>Software is designed for macOS. Minimum system requirements are listed on each product page. aSoft does not guarantee compatibility with future macOS versions, though we strive to maintain updates.</p>
+
+    <h2>05 — Updates</h2>
+    <p>Updates may be provided at aSoft's discretion. Major version updates may require a new purchase. Minor updates and bug fixes are provided free of charge where possible.</p>
+
+    <h2>06 — Disclaimer of Warranties</h2>
+    <div class="highlight">
+      The Software is provided "as is" without warranty of any kind. aSoft does not warrant that the Software will be error-free or uninterrupted. Use at your own risk.
+    </div>
+
+    <h2>07 — Limitation of Liability</h2>
+    <p>aSoft shall not be liable for any indirect, incidental, or consequential damages arising from your use of the Software. Maximum liability is limited to the amount you paid for the Software.</p>
+
+    <h2>08 — Governing Law</h2>
+    <p>These Terms are governed by the laws of Germany. Any disputes shall be resolved in the courts of Wuppertal, Germany.</p>
+
+    <h2>09 — Contact</h2>
+    <p>Questions about these Terms? Email: <a href="mailto:support@asoft.dev">support@asoft.dev</a></p>
+  </div>
+
+  <!-- PRIVACY -->
+  <div class="section" id="privacy">
+    <div class="updated">Last updated: May 7, 2026</div>
+
+    <h2>01 — Overview</h2>
+    <p>aSoft takes your privacy seriously. Our apps are built to work locally on your device. We collect minimal data and do not sell or share your personal information.</p>
+
+    <div class="highlight">
+      Port Monitor and Envio operate entirely on-device. They do not transmit your files, ports, environment variables, or any local data to external servers.
+    </div>
+
+    <h2>02 — Data We Collect</h2>
+    <p>We do not collect personal data through our macOS apps. When you make a purchase via Lemon Squeezy, the following data is collected by Lemon Squeezy (our payment processor) on our behalf:</p>
+    <ul>
+      <li>Name and email address (for order confirmation)</li>
+      <li>Payment information (processed securely by Lemon Squeezy / Stripe)</li>
+      <li>Country (for tax calculation)</li>
+    </ul>
+    <p>We only receive your email address and order details — we never see your payment card information.</p>
+
+    <h2>03 — What Our Apps Access</h2>
+    <p><strong style="color:var(--text)">Port Monitor</strong> reads network port information from your local system (equivalent to running <code style="color:var(--accent);font-family:var(--mono);font-size:13px">lsof -i</code>). This data never leaves your device.</p>
+    <p><strong style="color:var(--text)">Envio</strong> reads and writes <code style="color:var(--accent);font-family:var(--mono);font-size:13px">.env</code> files on your local file system only. No file contents are transmitted anywhere.</p>
+
+    <h2>04 — Third-Party Services</h2>
+    <p>Purchases are processed by <a href="https://www.lemonsqueezy.com/privacy" target="_blank">Lemon Squeezy</a>. Their privacy policy applies to data collected during checkout.</p>
+
+    <h2>05 — Data Retention</h2>
+    <p>We retain your email address to fulfil your order and provide customer support. You may request deletion at any time by contacting us.</p>
+
+    <h2>06 — Your Rights (GDPR)</h2>
+    <p>If you are located in the EU/EEA, you have the right to:</p>
+    <ul>
+      <li>Access the personal data we hold about you</li>
+      <li>Request correction or deletion of your data</li>
+      <li>Object to or restrict processing of your data</li>
+      <li>Data portability</li>
+    </ul>
+    <p>To exercise any of these rights, contact us at <a href="mailto:support@asoft.dev">support@asoft.dev</a>.</p>
+
+    <h2>07 — Contact</h2>
+    <p>Privacy questions? Email: <a href="mailto:support@asoft.dev">support@asoft.dev</a></p>
+  </div>
+
+  <!-- REFUND -->
+  <div class="section" id="refund">
+    <div class="updated">Last updated: May 7, 2026</div>
+
+    <h2>01 — Our Refund Policy</h2>
+    <p>We want you to be happy with your purchase. If you are not satisfied with an aSoft product, we offer refunds under the following conditions.</p>
+
+    <div class="highlight">
+      We offer a full refund within <strong style="color:var(--text)">14 days</strong> of purchase, no questions asked.
+    </div>
+
+    <h2>02 — How to Request a Refund</h2>
+    <p>To request a refund, contact us at <a href="mailto:support@asoft.dev">support@asoft.dev</a> with:</p>
+    <ul>
+      <li>Your order number (found in your Lemon Squeezy receipt email)</li>
+      <li>The product you purchased</li>
+      <li>Brief reason for refund (optional, but helpful for us to improve)</li>
+    </ul>
+    <p>We process refunds within 1–3 business days. The refund will be returned to your original payment method.</p>
+
+    <h2>03 — Exceptions</h2>
+    <p>Refunds may be declined in the following cases:</p>
+    <ul>
+      <li>Request is made more than 14 days after purchase</li>
+      <li>Evidence of abuse (e.g. repeated purchase and refund cycles)</li>
+    </ul>
+
+    <h2>04 — Technical Issues</h2>
+    <p>If you experience a technical problem with our Software, please contact us at <a href="mailto:support@asoft.dev">support@asoft.dev</a> before requesting a refund — we'll do our best to resolve the issue promptly.</p>
+
+    <h2>05 — Contact</h2>
+    <p>Refund questions? Email: <a href="mailto:support@asoft.dev">support@asoft.dev</a></p>
+  </div>
+
+</div>
+
+<footer>
+  <span>© 2026 aSoft. Anton Stremovskiy.</span>
+  <span>Wuppertal, Germany</span>
+</footer>
+
+<script>
+  function showTab(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+
+</body>
+</html>

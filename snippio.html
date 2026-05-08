@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — Snippio</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0D0D0F;
+            --surface: #1A1A1F;
+            --border: rgba(255,255,255,0.07);
+            --accent: #5B6EAE;
+            --accent-soft: rgba(91,110,174,0.15);
+            --text-primary: #E8E8ED;
+            --text-secondary: #8E8E9A;
+            --text-disabled: #4A4A55;
+            --gradient-1: #667EEA;
+            --gradient-2: #764BA2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text-primary);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Background orbs */
+        .bg-orbs {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--gradient-2);
+            bottom: 20%;
+            left: -80px;
+            animation-delay: -3s;
+        }
+
+        .orb-3 {
+            width: 200px;
+            height: 200px;
+            background: var(--gradient-1);
+            top: 50%;
+            right: 10%;
+            animation-delay: -6s;
+            opacity: 0.07;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-30px) scale(1.05); }
+        }
+
+        /* Layout */
+        .wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            padding: 60px 0 48px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--accent-soft);
+            border: 1px solid rgba(91,110,174,0.3);
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'DM Mono', monospace;
+            font-size: 13px;
+            color: var(--accent);
+        }
+
+        .logo-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--accent-soft);
+            border: 1px solid rgba(91,110,174,0.25);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 0.5px;
+        }
+
+        .header-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        h1 {
+            font-size: 40px;
+            font-weight: 600;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #E8E8ED 0%, #8E8E9A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--text-disabled);
+            font-family: 'DM Mono', monospace;
+        }
+
+        .meta-item span {
+            color: var(--text-secondary);
+        }
+
+        /* Content */
+        main {
+            padding: 48px 0 80px;
+        }
+
+        /* Summary card */
+        .summary-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .summary-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0.4;
+        }
+
+        .summary-title {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            font-family: 'DM Mono', monospace;
+            margin-bottom: 16px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .summary-icon {
+            font-size: 16px;
+            margin-top: 1px;
+            flex-shrink: 0;
+        }
+
+        .summary-item-text {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .summary-item-text strong {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 2px;
+            font-size: 13px;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 48px;
+            animation: fadeUp 0.5s ease both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section:nth-child(1) { animation-delay: 0.05s; }
+        .section:nth-child(2) { animation-delay: 0.1s; }
+        .section:nth-child(3) { animation-delay: 0.15s; }
+        .section:nth-child(4) { animation-delay: 0.2s; }
+        .section:nth-child(5) { animation-delay: 0.25s; }
+        .section:nth-child(6) { animation-delay: 0.3s; }
+        .section:nth-child(7) { animation-delay: 0.35s; }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .section-number {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            color: var(--accent);
+            background: var(--accent-soft);
+            border: 1px solid rgba(91,110,174,0.2);
+            border-radius: 6px;
+            padding: 2px 8px;
+            flex-shrink: 0;
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.2px;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        ul {
+            list-style: none;
+            margin: 12px 0;
+        }
+
+        ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 8px;
+            padding-left: 4px;
+        }
+
+        ul li::before {
+            content: '→';
+            color: var(--accent);
+            font-family: 'DM Mono', monospace;
+            font-size: 12px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        /* Highlight box */
+        .highlight {
+            background: var(--accent-soft);
+            border: 1px solid rgba(91,110,174,0.2);
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin: 16px 0;
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .highlight-icon {
+            font-size: 15px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* Code tag */
+        code {
+            font-family: 'DM Mono', monospace;
+            font-size: 12px;
+            background: rgba(91,110,174,0.12);
+            color: var(--accent);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 48px 0;
+        }
+
+        /* Contact */
+        .contact-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .contact-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .contact-info p {
+            font-size: 13px;
+            margin: 0;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: opacity 0.2s;
+        }
+
+        .contact-btn:hover {
+            opacity: 0.85;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 32px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-logo {
+            font-family: 'DM Mono', monospace;
+            font-size: 12px;
+            color: var(--accent);
+        }
+
+        .footer-sep {
+            color: var(--text-disabled);
+            font-size: 12px;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: var(--text-disabled);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-link {
+            font-size: 12px;
+            color: var(--text-disabled);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 28px; }
+            .summary-grid { grid-template-columns: 1fr; }
+            .contact-card { flex-direction: column; align-items: flex-start; }
+            footer { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+</div>
+
+<div class="wrapper">
+    <header>
+        <a href="#" class="logo">
+            <div class="logo-icon">&lt;/&gt;</div>
+            <span class="logo-name">Snippio</span>
+        </a>
+
+        <div class="header-badge">privacy policy</div>
+
+        <h1>We respect<br>your privacy.</h1>
+
+        <div class="header-meta">
+            <div class="meta-item">Effective: <span>May 2025</span></div>
+            <div class="meta-item">Last updated: <span>May 2025</span></div>
+            <div class="meta-item">App: <span>Snippio for macOS</span></div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Summary -->
+        <div class="summary-card">
+            <div class="summary-title">TL;DR — Quick Summary</div>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <span class="summary-icon">🔒</span>
+                    <div class="summary-item-text">
+                        <strong>No personal data collected</strong>
+                        We don't collect your name, email, or any personal information
+                    </div>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-icon">☁️</span>
+                    <div class="summary-item-text">
+                        <strong>iCloud sync (Pro)</strong>
+                        Your snippets sync via your own iCloud account — we never see them
+                    </div>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-icon">💳</span>
+                    <div class="summary-item-text">
+                        <strong>Payments via Apple</strong>
+                        All purchases handled by Apple. We don't see your payment info
+                    </div>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-icon">🚫</span>
+                    <div class="summary-item-text">
+                        <strong>No ads, no tracking</strong>
+                        We don't use analytics, trackers, or third-party SDKs
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1 -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2>Information We Collect</h2>
+            </div>
+            <p>Snippio is designed with privacy in mind. We collect minimal information necessary to provide the app's functionality.</p>
+            <ul>
+                <li><strong>No personal information</strong> — We do not collect your name, email address, phone number, or any other personally identifiable information</li>
+                <li><strong>No usage analytics</strong> — We do not track how you use the app, which features you access, or how often you open it</li>
+                <li><strong>No crash reporting</strong> — We rely on Apple's built-in crash reporting tools only</li>
+            </ul>
+            <div class="highlight">
+                <span class="highlight-icon">💡</span>
+                <span>Snippio operates entirely on your device. Your code snippets and templates are yours and stay on your device (or your iCloud account for Pro users).</span>
+            </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2>Data Storage</h2>
+            </div>
+            <p>All data created in Snippio is stored locally on your Mac using Apple's SwiftData framework.</p>
+            <ul>
+                <li><strong>Local storage</strong> — Your snippets, preferences, and app data are stored locally on your device using Apple's secure storage APIs</li>
+                <li><strong>iCloud sync (Pro only)</strong> — If you subscribe to Snippio Pro, your snippets are synced via iCloud using CloudKit. This data is stored in your personal iCloud account and is governed by Apple's Privacy Policy</li>
+                <li><strong>We have no access</strong> — We cannot access, read, or modify your iCloud data. It is encrypted and accessible only by you</li>
+            </ul>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2>Purchases &amp; Subscriptions</h2>
+            </div>
+            <p>Snippio offers optional in-app purchases including monthly, annual, and lifetime Pro subscriptions.</p>
+            <ul>
+                <li>All purchases are processed by <strong>Apple</strong> through the App Store</li>
+                <li>We do not collect or store any payment information</li>
+                <li>Purchase history is managed by your Apple ID</li>
+                <li>You can manage or cancel subscriptions in <code>System Settings → Apple ID → Subscriptions</code></li>
+                <li>Refund requests should be directed to Apple at <code>reportaproblem.apple.com</code></li>
+            </ul>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2>Third-Party Services</h2>
+            </div>
+            <p>Snippio uses only Apple's first-party frameworks and services:</p>
+            <ul>
+                <li><strong>SwiftData</strong> — Local data persistence</li>
+                <li><strong>CloudKit</strong> — iCloud sync for Pro subscribers (Apple's service)</li>
+                <li><strong>StoreKit 2</strong> — In-app purchases (Apple's payment system)</li>
+            </ul>
+            <div class="highlight">
+                <span class="highlight-icon">✅</span>
+                <span>We do not integrate any third-party analytics, advertising, or tracking SDKs. No data is shared with any third parties.</span>
+            </div>
+        </div>
+
+        <!-- Section 5 -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2>Children's Privacy</h2>
+            </div>
+            <p>Snippio is designed for developers and is not directed at children under the age of 13. We do not knowingly collect any information from children. Since we collect no personal information from any users, this applies equally to all age groups.</p>
+        </div>
+
+        <!-- Section 6 -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <h2>Changes to This Policy</h2>
+            </div>
+            <p>We may update this Privacy Policy from time to time. Any changes will be reflected on this page with an updated effective date. We encourage you to review this policy periodically.</p>
+            <p>Continued use of Snippio after any changes constitutes your acceptance of the updated policy.</p>
+        </div>
+
+        <!-- Section 7 -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-number">07</span>
+                <h2>Your Rights</h2>
+            </div>
+            <p>Since we do not collect personal data, there is no personal data to access, correct, or delete on our end. All your data (snippets, preferences) can be deleted by simply uninstalling the app from your Mac.</p>
+            <ul>
+                <li>To delete local data — uninstall Snippio from your Mac</li>
+                <li>To delete iCloud data — go to <code>System Settings → Apple ID → iCloud → Manage Storage</code> and remove Snippio data</li>
+            </ul>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Contact -->
+        <div class="contact-card">
+            <div class="contact-info">
+                <h3>Have questions?</h3>
+                <p>We're happy to help with any privacy-related questions.</p>
+            </div>
+            <a href="mailto:asoftdevsupport@gmail.com" class="contact-btn">
+                ✉️ Contact Us
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-left">
+            <span class="footer-logo">&lt;/&gt; Snippio</span>
+            <span class="footer-sep">·</span>
+            <span class="footer-text">© 2025 aSoft. All rights reserved.</span>
+        </div>
+        <div class="footer-links">
+            <a href="#" class="footer-link">Privacy Policy</a>
+            <a href="mailto:asoftdevsupport@gmail.com" class="footer-link">Support</a>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

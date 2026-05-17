@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NimbusDB — Privacy Policy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e1a;
+            --bg-card: #111827;
+            --bg-card-hover: #1a2235;
+            --border: rgba(255,255,255,0.06);
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent: #22d3ee;
+            --accent-glow: rgba(34, 211, 238, 0.15);
+            --green: #4ade80;
+            --red: #f87171;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        .grain {
+            position: fixed;
+            inset: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 56px;
+            animation: fadeUp 0.6s ease-out;
+        }
+
+        .logo-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent), #0891b2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 0 24px var(--accent-glow);
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span {
+            color: var(--accent);
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .updated {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px 32px;
+            margin-bottom: 20px;
+            transition: background 0.2s ease;
+            animation: fadeUp 0.6s ease-out both;
+        }
+
+        section:nth-child(2) { animation-delay: 0.05s; }
+        section:nth-child(3) { animation-delay: 0.1s; }
+        section:nth-child(4) { animation-delay: 0.15s; }
+        section:nth-child(5) { animation-delay: 0.2s; }
+        section:nth-child(6) { animation-delay: 0.25s; }
+        section:nth-child(7) { animation-delay: 0.3s; }
+        section:nth-child(8) { animation-delay: 0.35s; }
+        section:nth-child(9) { animation-delay: 0.4s; }
+
+        section:hover {
+            background: var(--bg-card-hover);
+        }
+
+        h2 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2 .icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .icon-blue { background: rgba(34, 211, 238, 0.12); }
+        .icon-green { background: rgba(74, 222, 128, 0.12); }
+        .icon-red { background: rgba(248, 113, 113, 0.12); }
+        .icon-purple { background: rgba(168, 85, 247, 0.12); }
+        .icon-orange { background: rgba(251, 191, 36, 0.12); }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 14.5px;
+            margin-bottom: 12px;
+        }
+
+        p:last-child { margin-bottom: 0; }
+
+        strong { color: var(--text-primary); font-weight: 600; }
+
+        .badge {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+
+        .badge-green {
+            background: rgba(74, 222, 128, 0.12);
+            color: var(--green);
+        }
+
+        .badge-red {
+            background: rgba(248, 113, 113, 0.1);
+            color: var(--red);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 6px 0;
+            color: var(--text-secondary);
+            font-size: 14px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        ul li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 8px;
+        }
+
+        .list-green li::before { background: var(--green); }
+        .list-red li::before { background: var(--red); }
+        .list-blue li::before { background: var(--accent); }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12.5px;
+            background: rgba(255,255,255,0.06);
+            padding: 2px 7px;
+            border-radius: 4px;
+            color: var(--accent);
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        a:hover { border-bottom-color: var(--accent); }
+
+        .footer {
+            text-align: center;
+            padding-top: 40px;
+            color: var(--text-muted);
+            font-size: 13px;
+            animation: fadeUp 0.6s ease-out 0.45s both;
+        }
+
+        .footer a { color: var(--text-secondary); }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 40px 16px 60px; }
+            section { padding: 22px 20px; }
+            .logo-text { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="grain"></div>
+    <div class="container">
+        <div class="header">
+            <div class="logo-row">
+                <div class="logo-icon">☁️</div>
+                <div class="logo-text">Nimbus<span>DB</span></div>
+            </div>
+            <h1>Privacy Policy</h1>
+            <div class="updated">Last updated: May 17, 2026</div>
+        </div>
+
+        <section>
+            <h2><span class="icon icon-blue">📋</span> Overview</h2>
+            <p>NimbusDB is a native macOS database management application developed by <strong>Anton Stremovskiy (aSoft)</strong>. Your privacy is important to us. NimbusDB does <strong>not</strong> collect, transmit, or store any personal data on external servers. All data stays on your device.</p>
+        </section>
+
+        <section>
+            <h2><span class="icon icon-green">💾</span> What NimbusDB Stores Locally <span class="badge badge-green">ON-DEVICE ONLY</span></h2>
+            <ul class="list-green">
+                <li><strong>Connection credentials</strong> (API Tokens, Server-to-Server Keys) are stored exclusively in the macOS Keychain — Apple's system-level secure storage.</li>
+                <li><strong>Connection metadata</strong> (names, container IDs, record types) is stored in a local SwiftData database. If iCloud is enabled, this metadata may sync across your devices via your personal iCloud account.</li>
+                <li><strong>Purchase information</strong> is managed entirely by Apple through StoreKit. NimbusDB verifies purchase status locally.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2><span class="icon icon-red">🚫</span> What NimbusDB Does NOT Collect <span class="badge badge-red">NONE</span></h2>
+            <ul class="list-red">
+                <li>No analytics or tracking data</li>
+                <li>No personal information (name, email, location)</li>
+                <li>No usage statistics</li>
+                <li>No crash reports sent to the developer</li>
+                <li>No advertising identifiers</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2><span class="icon icon-blue">🌐</span> Network Communication</h2>
+            <p>NimbusDB communicates <strong>only</strong> with Apple's CloudKit Web Services API (<code>api.apple-cloudkit.com</code>) to perform database operations on your behalf.</p>
+            <p>Requests are authenticated using <strong>your own credentials</strong> (Server-to-Server Keys) and sent directly from your Mac to Apple's servers.</p>
+            <p>There is <strong>no backend</strong> operated by the developer. No intermediary or third-party servers are involved.</p>
+        </section>
+
+        <section>
+            <h2><span class="icon icon-purple">🔐</span> Data Security</h2>
+            <ul class="list-blue">
+                <li>All credentials stored in the macOS Keychain, protected by OS-level encryption</li>
+                <li>NimbusDB runs within the macOS App Sandbox</li>
+                <li>All network communication uses HTTPS exclusively</li>
+                <li>Direct connection: Your Mac ↔ Apple CloudKit — no middlemen</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2><span class="icon icon-orange">🗑️</span> Data Retention & Deletion</h2>
+            <p>All data is stored locally. Uninstalling NimbusDB removes the application and its local data. Keychain entries may persist after uninstallation and can be removed manually via Keychain Access.</p>
+        </section>
+
+        <section>
+            <h2><span class="icon icon-blue">👶</span> Children's Privacy</h2>
+            <p>NimbusDB does not knowingly collect any data from children under the age of 13. The app is a developer tool and is not directed at children.</p>
+        </section>
+
+        <section>
+            <h2><span class="icon icon-green">🔄</span> Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time. Any changes will be posted at this URL. Continued use of NimbusDB after changes constitutes acceptance of the updated policy.</p>
+        </section>
+
+        <section>
+            <h2><span class="icon icon-purple">✉️</span> Contact</h2>
+            <p><strong>Email:</strong> <a href="mailto:stremovskiy@gmail.com">stremovskiy@gmail.com</a></p>
+            <p><strong>Website:</strong> <a href="https://asoft-dev.lemonsqueezy.com" target="_blank">asoft-dev.lemonsqueezy.com</a></p>
+        </section>
+
+        <div class="footer">
+            <p>© 2026 aSoft — Anton Stremovskiy. All rights reserved.</p>
+            <p><a href="https://asoft-dev.lemonsqueezy.com">asoft-dev.lemonsqueezy.com</a></p>
+        </div>
+    </div>
+</body>
+</html>
